@@ -1,18 +1,20 @@
 import math
 from random import randint
 
-højde = randint(1,42)
+def ball_drop_physics():
+    height = randint(1,100)
+    print("A ball is thrown out of a tower at the height of ",height,"meters")
 
-def gamestart():
-    print("En bold bliver smidt ud fra Rundetårn i en højde af ",højde,"Meter")
+    guess = float(input("How long du you think it takes the ball to reach the ground?: "))
 
-    tid_gæt = float(input("Hvor lang tid tror du det tager i sekunder?: "))
+    time = math.sqrt((-height)/(1/2*(-9.82)))
+    print ("\nThe ball hits the ground after ",time, " seconds")
 
-    tid = math.sqrt((-højde)/(1/2*(-9.82)))
-    print ("\nBolden rammer jorden efter ",tid, " sekunder")
+    deviation = abs(time - guess)
+    print("\nYou were off by ",deviation," seconds")
 
-    afvigelse = abs(tid-tid_gæt)
-    print("\nDu gættede forkert med ",afvigelse," sekunder")
+    deviation_percentage = int((abs(time - guess) / time) *100)
+    print("You'r deviation in percentage is",deviation_percentage,"%")
 
-    procentvis_afvigelse = int((abs(tid - tid_gæt) / tid) *100)
-    print("Din procentvise afvigelse var",procentvis_afvigelse,"%")
+    if deviation_percentage < 10:
+        print("Very good")
