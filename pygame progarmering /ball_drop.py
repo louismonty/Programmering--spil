@@ -4,8 +4,9 @@ from random import randint
 
 screen_width = 1000
 screen_hight = 1000
-højde = randint(1,42)
-x_ball = højde*9 + 100
+height = randint(1,100)
+x_ball =490-height*9
+
 
 Rundetaarn = pygame.image.load("rundetaarn(1).png")
 screen = pygame.display.set_mode((screen_width,screen_hight))
@@ -18,20 +19,22 @@ def message_display(text):
     text_surf = font.render(text,True,([0,0,0]))
     screen.blit(text_surf,[10,10])
 
-def gamestart():
-    text1 = ("En bold bliver smidt ud fra Rundetårn i en højde af ",højde,"Meter")
+def ball_drop_physics():
+    print("A ball is thrown out of a tower at the height of ",height,"meters")
 
-def gameend():
-    tid_gæt = float(input("Hvor lang tid tror du det tager i sekunder?: "))
+    guess = float(input("How long du you think it takes the ball to reach the ground?: "))
 
-    tid = math.sqrt((-højde)/(1/2*(-9.82)))
-    print ("\nBolden rammer jorden efter ",tid, " sekunder")
+    time = math.sqrt((-height)/(1/2*(-9.82)))
+    print ("\nThe ball hits the ground after ",time, " seconds")
 
-    afvigelse = abs(tid-tid_gæt)
-    print("\nDu gættede forkert med ",afvigelse," sekunder")
+    deviation = abs(time - guess)
+    print("\nYou were off by ",deviation," seconds")
 
-    procentvis_afvigelse = int((abs(tid - tid_gæt) / tid) *100)
-    print("Din procentvise afvigelse var",procentvis_afvigelse,"%")
+    deviation_percentage = int((abs(time - guess) / time) *100)
+    print("You'r deviation in percentage is",deviation_percentage,"%")
+
+    if deviation_percentage < 10:
+        print("Very good")
 
 def gameloop():
     run = True
@@ -42,12 +45,12 @@ def gameloop():
             if event.type == pygame.QUIT:
                 run=False
             
-        message_display("En bold bliver smidt ud fra Rundetårn i en højde af ")
-        pygame.draw.circle(screen,(0, 64, 64, 64),(70,x_ball),20,20)
+        #message_display("En bold bliver smidt ud fra Rundetårn i en højde af ")
+        pygame.draw.circle(screen,(0, 64, 64, 64),(70,x_ball),10,10)
         screen.blit(Rundetaarn, (100,100))
         pygame.display.update()
     pygame.quit()
-print(højde)
+print(height)
 print(x_ball)
 gameloop()
 

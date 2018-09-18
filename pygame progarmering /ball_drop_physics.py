@@ -18,3 +18,4 @@ def ball_drop_physics():
 
     if deviation_percentage < 10:
         print("Very good")
+ball_drop_physics()
