@@ -1,4 +1,5 @@
 import math
+import os
 
 from random import randint
 
@@ -18,3 +19,5 @@ print("You´r devition in percentage is", deviation_percentage,"%")
 
 if deviation_percentage < 10:
     print("Very good")
+
+os.system("pause")
