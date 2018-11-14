@@ -71,11 +71,8 @@ def gameloop():
                 if (event.key==pygame.K_BACKSPACE):
                     screen.fill([255,255,255])
                     guess = ""
-
-                    
                 if (event.key==pygame.K_COMMA):
                     guess += "."
-
                 if (event.key==pygame.K_RETURN):
                     time = math.sqrt((-height)/(1/2*(-9.82)))
                     time = round(time,2)
@@ -95,8 +92,11 @@ def gameloop():
                     message_display("%",580,140)
                     if deviation_percentage < 10:
                         message_display("Very good",300,160)
-
-
+                    #for i in range(height):
+                        #global x_ball
+                        #x_ball += 9
+                        #pygame.draw.circle(screen,(0, 64, 64, 64),(70,x_ball),10,10)
+                        #screen.fill([255,255,255])
 
         render_loop()
         message_display(str(guess),numX,numY)
