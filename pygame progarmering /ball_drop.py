@@ -34,7 +34,7 @@ def render_loop():
 
 
 
-def gameloop():
+def gameloop_bd():
     numX = 510
     numY = 30
     move = 10
@@ -103,9 +103,6 @@ def gameloop():
         #print(movex)
 
     pygame.quit()
-print(height)
-print(x_ball)
-gameloop()
 
 
 
