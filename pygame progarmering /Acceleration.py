@@ -3,29 +3,33 @@ import math
 import os
 from random import randint
 
+#Definitons
 screen_width = 1100
 screen_hight = 1000
 screen = pygame.display.set_mode((screen_width,screen_hight))
+#Initialize screen
 pygame.display.init() 
 pygame.init()
+#Font for tekst
 font = pygame.font.SysFont("Times New Roman",30)
+#Make screen white
 screen.fill([255,255,255])
 
-
+#Text editor
 def message_display(text,x_text,y_text):
     text_surf = font.render(text,True,([0,0,0]))
     screen.blit(text_surf,[x_text,y_text])
 
-
-
-
+#Gameloop
 def gameloop_ac():
-    pygame.init()
     run = True
     geuss = ""
+    #Randome time
     time = randint(1,20)
+    #Calgulates acceleration 
     acceleration = ((40/3.6)/time)
     while run:
+        #Makes game run in loop 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run=False
@@ -35,7 +39,9 @@ def gameloop_ac():
             start_print += " seconds"
             message_display(str(start_print),1,1)
             message_display("At which acceleration do you the think the car will gain?: ",1,40)
+            #Checks if a button is pressed
             if (event.type==pygame.KEYDOWN):
+                #Checks if 1 key is pressed
                 if (event.key==pygame.K_1):
                     geuss += "1"
                 if (event.key==pygame.K_2):
@@ -56,19 +62,25 @@ def gameloop_ac():
                     geuss += "9"
                 if (event.key==pygame.K_0):
                     geuss += "0"
+                    #Deletes the texst 
                 if (event.key==pygame.K_BACKSPACE):
                     screen.fill([255,255,255])
                     geuss = ""
+                    #Write a comma
                 if (event.key==pygame.K_COMMA):
                     geuss += "."
+                    #Checks if enter key is pressed
                 if (event.key==pygame.K_RETURN):
+                    #rounds up time
                     time = round(time,2)
+                    #add´s the tekst togeter 
                     acceleration_print = "Acceleration is "
                     acceleration_print += str(round(acceleration,2))
                     acceleration_print += " m/s^2"
+                    #prints the tekst 
                     message_display(acceleration_print,300,100)
                     deviation_print = "You were off by "
-                    deviation_print += str(round(acceleration-float(geuss),2))
+                    deviation_print += str(abs(round(acceleration-float(geuss),2)))
                     deviation_print += " m/s^2"
                     message_display(deviation_print,300,130)
                     deviation_percentage = int((abs(acceleration - float(geuss))/time)*100)
@@ -77,33 +89,9 @@ def gameloop_ac():
                     deviation_percentage_print += "%"
                     message_display(deviation_percentage_print,300,160)
 
-                    #delevation = abs(acceleration - float(geuss))
-                    #deviation = round(deviation,2)
-                    #message_display(str(time),540,100)
-                    #message_display(" seconds",580,100)
-                    #message_display("You were off by",300,120)
-                    #message_display(str(deviation),440,120)
-                    #message_display(" seconds",480,120)
-                    #deviation_percentage = int((abs(acceleration - geuss)/time)*100)
-                    #str(deviation_percentage)
-                    #message_display("You'r deviation in percentage is",300,140)
-                    #message_display(str(deviation_percentage),560,140)
-                    #message_display("%",580,140)
-                    #if deviation_percentage < 10:
-                        #message_display("Very good",300,160)
             message_display(str(geuss),700,40)
             
-
-
-
-        #message_display(str(acceleration),1,70 )
-        #message_display("m/s^2",1,90)
-        #message_display("\n You were off by ",1,110)
-        #message_display(str(delevation),1,130)
-        #message_display("You´r devition in percentage is",1,150)
-        #message_display(str(deviation_percentage),1,170)
-        #message_display("%",1,190)
-        #if deviation_percentage < 10:
-            #message_display("Very good",1,1)
         pygame.display.update()
+#gameloop_ac()
 pygame.quit()
+
